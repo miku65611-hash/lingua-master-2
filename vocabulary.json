@@ -1,0 +1,50 @@
+
+{
+  "N5": [
+    {"w":"家族","r":"かぞく","m":"Gia đình","type":"Danh từ","jp":"家族と住んでいます。","vi":"Tôi đang sống cùng gia đình."},
+    {"w":"仕事","r":"しごと","m":"Công việc","type":"Danh từ","jp":"仕事を探しています。","vi":"Tôi đang tìm việc."},
+    {"w":"時間","r":"じかん","m":"Thời gian","type":"Danh từ","jp":"時間があります。","vi":"Tôi có thời gian."},
+    {"w":"買う","r":"かう","m":"Mua","type":"Động từ","jp":"本を買います。","vi":"Tôi mua sách."},
+    {"w":"大きい","r":"おおきい","m":"To, lớn","type":"Tính từ","jp":"大きい車です。","vi":"Đây là chiếc xe lớn."},
+    {"w":"小さい","r":"ちいさい","m":"Nhỏ","type":"Tính từ","jp":"小さい犬がいます。","vi":"Có một con chó nhỏ."},
+    {"w":"新しい","r":"あたらしい","m":"Mới","type":"Tính từ","jp":"新しい学校です。","vi":"Đây là trường học mới."},
+    {"w":"古い","r":"ふるい","m":"Cũ","type":"Tính từ","jp":"古い本を読みます。","vi":"Tôi đọc sách cũ."},
+    {"w":"毎日","r":"まいにち","m":"Mỗi ngày","type":"Trạng từ","jp":"毎日日本語を勉強します。","vi":"Tôi học tiếng Nhật mỗi ngày."},
+    {"w":"楽しい","r":"たのしい","m":"Vui vẻ, thú vị","type":"Tính từ","jp":"日本語の勉強は楽しいです。","vi":"Việc học tiếng Nhật rất thú vị."}
+  ],
+  "N4": [
+    {"w":"場合","r":"ばあい","m":"Trường hợp","type":"Danh từ","jp":"雨の場合は中止します。","vi":"Trường hợp trời mưa thì sẽ hủy."},
+    {"w":"約束","r":"やくそく","m":"Lời hứa, cuộc hẹn","type":"Danh từ","jp":"友達と約束があります。","vi":"Tôi có hẹn với bạn."},
+    {"w":"連絡","r":"れんらく","m":"Liên lạc","type":"Danh từ","jp":"後で連絡してください。","vi":"Hãy liên lạc sau nhé."},
+    {"w":"間に合う","r":"まにあう","m":"Kịp giờ","type":"Động từ","jp":"電車に間に合いました。","vi":"Tôi đã kịp chuyến tàu."},
+    {"w":"調べる","r":"しらべる","m":"Tra cứu, tìm hiểu","type":"Động từ","jp":"インターネットで調べます。","vi":"Tôi tra cứu trên Internet."},
+    {"w":"続ける","r":"つづける","m":"Tiếp tục","type":"Động từ","jp":"勉強を続けます。","vi":"Tôi tiếp tục học."},
+    {"w":"必要","r":"ひつよう","m":"Cần thiết","type":"Tính từ đuôi な","jp":"パスポートが必要です。","vi":"Cần có hộ chiếu."},
+    {"w":"安心","r":"あんしん","m":"Yên tâm","type":"Danh từ, tính từ đuôi な","jp":"これで安心しました。","vi":"Như vậy tôi đã yên tâm."}
+  ],
+  "N3": [
+    {"w":"予防する","r":"よぼうする","m":"Phòng ngừa","type":"Động từ","jp":"病気を予防することが大切です。","vi":"Phòng ngừa bệnh tật rất quan trọng."},
+    {"w":"信用","r":"しんよう","m":"Sự tin tưởng","type":"Danh từ, động từ する","jp":"彼を信用しています。","vi":"Tôi tin tưởng anh ấy."},
+    {"w":"経験","r":"けいけん","m":"Kinh nghiệm","type":"Danh từ, động từ する","jp":"日本で働いた経験があります。","vi":"Tôi có kinh nghiệm làm việc ở Nhật."},
+    {"w":"影響","r":"えいきょう","m":"Ảnh hưởng","type":"Danh từ, động từ する","jp":"天気は気分に影響します。","vi":"Thời tiết ảnh hưởng đến tâm trạng."},
+    {"w":"解決する","r":"かいけつする","m":"Giải quyết","type":"Động từ","jp":"問題を解決します。","vi":"Giải quyết vấn đề."},
+    {"w":"増加する","r":"ぞうかする","m":"Gia tăng","type":"Động từ","jp":"人口が増加しています。","vi":"Dân số đang gia tăng."},
+    {"w":"確認する","r":"かくにんする","m":"Xác nhận, kiểm tra","type":"Động từ","jp":"予定を確認します。","vi":"Tôi kiểm tra lịch trình."}
+  ],
+  "N2": [
+    {"w":"維持する","r":"いじする","m":"Duy trì","type":"Động từ","jp":"健康を維持する必要があります。","vi":"Cần duy trì sức khỏe."},
+    {"w":"把握する","r":"はあくする","m":"Nắm bắt","type":"Động từ","jp":"状況を正確に把握します。","vi":"Nắm bắt tình hình chính xác."},
+    {"w":"貢献する","r":"こうけんする","m":"Đóng góp","type":"Động từ","jp":"社会に貢献したいです。","vi":"Tôi muốn đóng góp cho xã hội."},
+    {"w":"傾向","r":"けいこう","m":"Xu hướng","type":"Danh từ","jp":"最近の傾向を調べます。","vi":"Tôi tìm hiểu xu hướng gần đây."},
+    {"w":"促進する","r":"そくしんする","m":"Thúc đẩy","type":"Động từ","jp":"交流を促進します。","vi":"Thúc đẩy giao lưu."},
+    {"w":"慎重","r":"しんちょう","m":"Thận trọng","type":"Tính từ đuôi な","jp":"慎重に考えます。","vi":"Tôi suy nghĩ một cách thận trọng."}
+  ],
+  "N1": [
+    {"w":"懸念","r":"けねん","m":"Sự lo ngại","type":"Danh từ, động từ する","jp":"将来への懸念があります。","vi":"Có sự lo ngại về tương lai."},
+    {"w":"顕著","r":"けんちょ","m":"Rõ rệt, nổi bật","type":"Tính từ đuôi な","jp":"顕著な変化が見られます。","vi":"Có thể thấy sự thay đổi rõ rệt."},
+    {"w":"遂行する","r":"すいこうする","m":"Thực hiện, hoàn thành","type":"Động từ","jp":"任務を遂行します。","vi":"Tôi thực hiện nhiệm vụ."},
+    {"w":"妥協する","r":"だきょうする","m":"Thỏa hiệp","type":"Động từ","jp":"簡単には妥協しません。","vi":"Tôi không dễ dàng thỏa hiệp."},
+    {"w":"膨大","r":"ぼうだい","m":"Khổng lồ, đồ sộ","type":"Tính từ đuôi な","jp":"膨大な情報があります。","vi":"Có một lượng thông tin khổng lồ."},
+    {"w":"曖昧","r":"あいまい","m":"Mơ hồ, không rõ ràng","type":"Tính từ đuôi な","jp":"説明が曖昧です。","vi":"Lời giải thích không rõ ràng."}
+  ]
+}
