@@ -161,6 +161,17 @@ header p {
   margin: 18px 0;
 }
 
+.flip-btn {
+  background: #eef5ff;
+  color: #1769e0;
+  border: 1px solid #dce7f8;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-top: 18px;
+  font-weight: bold;
+  width: 100%;
+}
+
 .example {
   background: var(--light);
   border-radius: 12px;
@@ -294,7 +305,13 @@ footer {
   <div class="card" id="wordCard">
     <div class="card-label" id="levelLabel">JLPT N5</div>
     <div class="word" id="word">水</div>
+
     <div class="reading" id="reading">みず</div>
+
+    <button class="flip-btn" id="flipBtn">
+      👁 Hiện đáp án
+    </button>
+
     <div class="meaning" id="meaning">Nước</div>
 
     <div class="example">
@@ -341,6 +358,7 @@ let vocabulary = {};
 let currentLevel = "N5";
 let currentIndex = 0;
 let filteredWords = [];
+let answerVisible = false;
 
 function getLearned() {
   try {
@@ -353,10 +371,14 @@ function getLearned() {
 }
 
 function saveLearned(data) {
-  localStorage.setItem(
-    "linguaLearned",
-    JSON.stringify(data)
-  );
+  try {
+    localStorage.setItem(
+      "linguaLearned",
+      JSON.stringify(data)
+    );
+  } catch (error) {
+    alert("Không thể lưu tiến độ học tập!");
+  }
 }
 
 function getKey(word) {
@@ -402,6 +424,15 @@ function renderWord() {
   document.getElementById("word").textContent = item.w;
   document.getElementById("reading").textContent = item.r;
   document.getElementById("meaning").textContent = item.m;
+
+  answerVisible = false;
+
+  document.getElementById("meaning").style.display = "none";
+  document.getElementById("exampleVI").style.display = "none";
+
+  document.getElementById("flipBtn").textContent =
+    "👁 Hiện đáp án";
+
   document.getElementById("exampleJP").textContent = item.jp;
   document.getElementById("exampleVI").textContent = item.vi;
 
@@ -444,6 +475,20 @@ document.querySelectorAll(".level-btn").forEach(btn => {
   });
 });
 
+// Flashcard: lật thẻ xem đáp án
+document.getElementById("flipBtn").addEventListener("click", () => {
+  answerVisible = !answerVisible;
+
+  document.getElementById("meaning").style.display =
+    answerVisible ? "block" : "none";
+
+  document.getElementById("exampleVI").style.display =
+    answerVisible ? "block" : "none";
+
+  document.getElementById("flipBtn").textContent =
+    answerVisible ? "🙈 Ẩn đáp án" : "👁 Hiện đáp án";
+});
+
 // Đánh dấu đã thuộc
 document.getElementById("knownBtn").addEventListener("click", () => {
   const item = filteredWords[currentIndex];
@@ -453,6 +498,11 @@ document.getElementById("knownBtn").addEventListener("click", () => {
   learned[getKey(item.w)] = true;
 
   saveLearned(learned);
+
+  if (currentIndex < filteredWords.length - 1) {
+    currentIndex++;
+  }
+
   renderWord();
 });
 
