@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<title>Lingua Master 2.0</title>
+
+<style>
+:root {
+  --blue: #2563eb;
+  --dark: #173b75;
+  --light: #eff6ff;
+  --white: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f8ff;
+  color: var(--text);
+}
+
+header {
+  background: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5eaf3;
+}
+
+.logo {
+  color: var(--blue);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.logo span {
+  color: var(--dark);
+}
+
+.profile {
+  background: var(--light);
+  color: var(--blue);
+  padding: 10px;
+  border-radius: 50%;
+}
+
+main {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  padding-bottom: 95px;
+}
+
+.welcome {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+.welcome h1 {
+  font-size: 25px;
+  margin: 8px 0;
+}
+
+.welcome p {
+  line-height: 1.6;
+  opacity: .95;
+}
+
+.section-title {
+  font-size: 19px;
+  font-weight: 750;
+  margin: 25px 0 15px;
+}
+
+.levels {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.level {
+  border: 1px solid #dbeafe;
+  background: white;
+  color: var(--blue);
+  padding: 11px 19px;
+  border-radius: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.level.active {
+  background: var(--blue);
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.card {
+  background: white;
+  padding: 19px;
+  border-radius: 17px;
+  border: 1px solid #e7edf7;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.card:active {
+  transform: scale(.97);
+}
+
+.card .emoji {
+  font-size: 30px;
+}
+
+.card h3 {
+  margin: 12px 0 5px;
+  font-size: 16px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.progress-box {
+  background: white;
+  padding: 19px;
+  border-radius: 17px;
+  margin-top: 20px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #e5edfa;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--blue);
+  transition: .3s;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.back {
+  background: var(--light);
+  color: var(--blue);
+  border: none;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.study-card {
+  background: white;
+  padding: 35px 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin: 20px 0;
+  border: 1px solid #e5eaf3;
+}
+
+.study-card h1 {
+  font-size: 42px;
+  color: var(--blue);
+}
+
+.study-card p {
+  color: var(--muted);
+}
+
+.action {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.secondary {
+  background: var(--light);
+  color: var(--blue);
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  background: white;
+  border: 1px solid #dbeafe;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+  margin: 10px 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.quiz-option:disabled {
+  opacity: .7;
+}
+
+.result {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #e5eaf3;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px;
+  z-index: 10;
+}
+
+.nav-item {
+  border: none;
+  background: none;
+  color: #94a3b8;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nav-item span {
+  display: block;
+  font-size: 21px;
+  margin-bottom: 4px;
+}
+
+.nav-item.active {
+  color: var(--blue);
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+  padding: 20px;
+}
+
+@media (max-width: 380px) {
+  main { padding: 14px; }
+  .card { padding: 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LINGUA <span>MASTER</span></div>
+  <div class="profile">👤</div>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+  <div class="welcome">
+    <small>JAPANESE LEARNING PLATFORM</small>
+    <h1>こんにちは！ 👋</h1>
+    <p>Chào mừng bạn đến với Lingua Master 2.0. Hãy học một chút mỗi ngày!</p>
+  </div>
+
+  <div class="section-title">Chọn cấp độ JLPT</div>
+  <div class="levels">
+    <button class="level active" onclick="selectLevel(this)">N5</button>
+    <button class="level" onclick="selectLevel(this)">N4</button>
+    <button class="level" onclick="selectLevel(this)">N3</button>
+    <button class="level" onclick="selectLevel(this)">N2</button>
+    <button class="level" onclick="selectLevel(this)">N1</button>
+  </div>
+
+  <div class="section-title">Danh mục học tập</div>
+  <div class="grid">
+    <div class="card" onclick="openPage('vocab')">
+      <div class="emoji">📚</div>
+      <h3>Từ vựng</h3>
+      <p>Học từ mới mỗi ngày</p>
+    </div>
+
+    <div class="card" onclick="openPage('kanji')">
+      <div class="emoji">漢</div>
+      <h3>Kanji</h3>
+      <p>Đọc và ghi nhớ chữ Hán</p>
+    </div>
+
+    <div class="card" onclick="openPage('grammar')">
+      <div class="emoji">📝</div>
+      <h3>Ngữ pháp</h3>
+      <p>Hiểu cấu trúc tiếng Nhật</p>
+    </div>
+
+    <div class="card" onclick="openPage('quiz')">
+      <div class="emoji">🎯</div>
+      <h3>Kiểm tra</h3>
+      <p>Thử thách kiến thức</p>
+    </div>
+  </div>
+
+  <div class="progress-box">
+    <strong>📈 Tiến độ học tập</strong>
+    <p>Điểm kiểm tra: <span id="score">0</span></p>
+    <p>Từ đã học: <span id="learned">0</span></p>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+  </div>
+</section>
+
+<section id="vocab" class="page">
+  <button class="back" onclick="openPage('home')">← Trang chủ</button>
+  <div class="section-title">📚 Học từ vựng</div>
+  <div class="study-card">
+    <p id="vocab-count">Từ vựng 1</p>
+    <h1 id="word">学校</h1>
+    <p id="reading">がっこう</p>
+    <h3 id="meaning">Trường học</h3>
+    <button class="action secondary" onclick="nextWord()">Từ tiếp theo →</button>
+    <button class="action" onclick="markLearned()">✓ Đã học từ này</button>
+  </div>
+</section>
+
+<section id="kanji" class="page">
+  <button class="back" onclick="openPage('home')">← Trang chủ</button>
+  <div class="section-title">漢 Kanji cơ bản</div>
+  <div class="study-card">
+    <h1>日</h1>
+    <h3>にち・ひ</h3>
+    <p>Ngày, mặt trời</p>
+    <p>Ví dụ: 日本（にほん）- Nhật Bản</p>
+  </div>
+  <div class="study-card">
+    <h1>人</h1>
+    <h3>じん・ひと</h3>
+    <p>Người</p>
+    <p>Ví dụ: 日本人（にほんじん）- Người Nhật</p>
+  </div>
+</section>
+
+<section id="grammar" class="page">
+  <button class="back" onclick="openPage('home')">← Trang chủ</button>
+  <div class="section-title">📝 Ngữ pháp tiếng Nhật</div>
+  <div class="study-card">
+    <h2>～は～です</h2>
+    <p>Dùng để giới thiệu hoặc xác định một sự vật, sự việc.</p>
+    <h3>私は学生です。</h3>
+    <p>わたしは がくせいです。</p>
+    <p>Tôi là học sinh.</p>
+  </div>
+  <div class="study-card">
+    <h2>～が好きです</h2>
+    <p>Dùng để diễn tả sở thích.</p>
+    <h3>日本語が好きです。</h3>
+    <p>にほんごがすきです。</p>
+    <p>Tôi thích tiếng Nhật.</p>
+  </div>
+</section>
+
+<section id="quiz" class="page">
+  <button class="back" onclick="openPage('home')">← Trang chủ</button>
+  <div class="section-title">🎯 Kiểm tra từ vựng</div>
+  <div class="study-card">
+    <p>学校 có nghĩa là gì?</p>
+    <button class="quiz-option" onclick="answer(this,false)">A. Bệnh viện</button>
+    <button class="quiz-option" onclick="answer(this,true)">B. Trường học</button>
+    <button class="quiz-option" onclick="answer(this,false)">C. Nhà ga</button>
+    <button class="quiz-option" onclick="answer(this,false)">D. Thư viện</button>
+    <div id="quiz-result" class="result"></div>
+    <button class="action secondary" onclick="resetQuiz()">Làm lại</button>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="openPage('home',this)">
+    <span>⌂</span>Trang chủ
+  </button>
+  <button class="nav-item" onclick="openPage('vocab',this)">
+    <span>📚</span>Từ vựng
+  </button>
+  <button class="nav-item" onclick="openPage('kanji',this)">
+    <span>漢</span>Kanji
+  </button>
+  <button class="nav-item" onclick="openPage('grammar',this)">
+    <span>📝</span>Ngữ pháp
+  </button>
+  <button class="nav-item" onclick="openPage('quiz',this)">
+    <span>🎯</span>Kiểm tra
+  </button>
+</nav>
+
+<footer>LINGUA MASTER 2.0 • LEARN EVERY DAY</footer>
+
+<script>
+const words = [
+  {word:"学校",reading:"がっこう",meaning:"Trường học"},
+  {word:"先生",reading:"せんせい",meaning:"Giáo viên"},
+  {word:"学生",reading:"がくせい",meaning:"Học sinh"},
+  {word:"友達",reading:"ともだち",meaning:"Bạn bè"},
+  {word:"日本",reading:"にほん",meaning:"Nhật Bản"},
+  {word:"水",reading:"みず",meaning:"Nước"}
+];
+
+let currentWord = 0;
+let learned = Number(localStorage.getItem("learned") || 0);
+let score = Number(localStorage.getItem("score") || 0);
+let answered = false;
+
+function openPage(id,button) {
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav-item").forEach(n => {
+    n.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  window.scrollTo(0,0);
+}
+
+function selectLevel(button) {
+  document.querySelectorAll(".level").forEach(b => {
+    b.classList.remove("active");
+  });
+  button.classList.add("active");
+}
+
+function showWord() {
+  const w = words[currentWord];
+  document.getElementById("word").textContent = w.word;
+  document.getElementById("reading").textContent = w.reading;
+  document.getElementById("meaning").textContent = w.meaning;
+  document.getElementById("vocab-count").textContent =
+    `Từ vựng ${currentWord + 1}/${words.length}`;
+}
+
+function nextWord() {
+  currentWord = (currentWord + 1) % words.length;
+  showWord();
+}
+
+function markLearned() {
+  learned++;
+  localStorage.setItem("learned",learned);
+  updateProgress();
+  nextWord();
+}
+
+function answer(button,correct) {
+  if(answered) return;
+  answered = true;
+
+  if(correct) {
+    score++;
+    localStorage.setItem("score",score);
+    document.getElementById("quiz-result").textContent =
+      "🎉 Chính xác! Bạn đã trả lời đúng.";
+  } else {
+    document.getElementById("quiz-result").textContent =
+      "❌ Chưa chính xác. Đáp án là Trường học.";
+  }
+
+  document.querySelectorAll(".quiz-option").forEach(b => {
+    b.disabled = true;
+  });
+
+  updateProgress();
+}
+
+function resetQuiz() {
+  answered = false;
+  document.getElementById("quiz-result").textContent = "";
+  document.querySelectorAll(".quiz-option").forEach(b => {
+    b.disabled = false;
+  });
+}
+
+function updateProgress() {
+  document.getElementById("learned").textContent = learned;
+  document.getElementById("score").textContent = score;
+  document.getElementById("progress").style.width =
+    Math.min(100,learned * 5) + "%";
+}
+
+showWord();
+updateProgress();
+</script>
+
+</body>
+                                                          </html>
+                                                          
