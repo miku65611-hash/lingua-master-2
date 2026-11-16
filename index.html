@@ -335,61 +335,28 @@ footer {
 </footer>
 
 <script>
-const vocabulary = {
-  N5: [
-    {w:"水",r:"みず",m:"Nước",jp:"水を飲みます。",vi:"Tôi uống nước."},
-    {w:"学校",r:"がっこう",m:"Trường học",jp:"学校へ行きます。",vi:"Tôi đi đến trường."},
-    {w:"先生",r:"せんせい",m:"Giáo viên",jp:"先生は優しいです。",vi:"Giáo viên rất hiền."},
-    {w:"友達",r:"ともだち",m:"Bạn bè",jp:"友達と話します。",vi:"Tôi nói chuyện với bạn."},
-    {w:"食べる",r:"たべる",m:"Ăn",jp:"パンを食べます。",vi:"Tôi ăn bánh mì."},
-    {w:"飲む",r:"のむ",m:"Uống",jp:"お茶を飲みます。",vi:"Tôi uống trà."},
-    {w:"今日",r:"きょう",m:"Hôm nay",jp:"今日は暑いです。",vi:"Hôm nay trời nóng."},
-    {w:"明日",r:"あした",m:"Ngày mai",jp:"明日、勉強します。",vi:"Ngày mai tôi học."},
-    {w:"本",r:"ほん",m:"Sách",jp:"本を読みます。",vi:"Tôi đọc sách."},
-    {w:"車",r:"くるま",m:"Ô tô",jp:"車があります。",vi:"Tôi có ô tô."}
-  ],
-  N4: [
-    {w:"必要",r:"ひつよう",m:"Cần thiết",jp:"勉強には時間が必要です。",vi:"Việc học cần thời gian."},
-    {w:"経験",r:"けいけん",m:"Kinh nghiệm",jp:"仕事の経験があります。",vi:"Tôi có kinh nghiệm làm việc."},
-    {w:"準備",r:"じゅんび",m:"Chuẩn bị",jp:"旅行の準備をします。",vi:"Tôi chuẩn bị cho chuyến đi."},
-    {w:"連絡",r:"れんらく",m:"Liên lạc",jp:"後で連絡します。",vi:"Tôi sẽ liên lạc sau."},
-    {w:"安心",r:"あんしん",m:"Yên tâm",jp:"それを聞いて安心しました。",vi:"Nghe điều đó tôi đã yên tâm."},
-    {w:"間違える",r:"まちがえる",m:"Nhầm lẫn",jp:"答えを間違えました。",vi:"Tôi đã trả lời sai."}
-  ],
-  N3: [
-    {w:"予防する",r:"よぼうする",m:"Phòng ngừa",jp:"病気を予防します。",vi:"Phòng ngừa bệnh tật."},
-    {w:"信用",r:"しんよう",m:"Sự tin tưởng",jp:"彼を信用しています。",vi:"Tôi tin tưởng anh ấy."},
-    {w:"制作",r:"せいさく",m:"Sản xuất, sáng tác",jp:"映画を制作します。",vi:"Sản xuất phim."},
-    {w:"展開",r:"てんかい",m:"Triển khai, phát triển",jp:"新しい計画を展開します。",vi:"Triển khai kế hoạch mới."},
-    {w:"連続",r:"れんぞく",m:"Liên tiếp",jp:"三日間連続で働きました。",vi:"Tôi đã làm việc liên tiếp ba ngày."},
-    {w:"活気",r:"かっき",m:"Sức sống, sự sôi động",jp:"この町は活気があります。",vi:"Thành phố này rất sôi động."}
-  ],
-  N2: [
-    {w:"維持",r:"いじ",m:"Duy trì",jp:"健康を維持することが大切です。",vi:"Duy trì sức khỏe rất quan trọng."},
-    {w:"促進",r:"そくしん",m:"Thúc đẩy",jp:"経済の発展を促進します。",vi:"Thúc đẩy phát triển kinh tế."},
-    {w:"把握",r:"はあく",m:"Nắm bắt",jp:"状況を正確に把握します。",vi:"Nắm bắt tình hình chính xác."},
-    {w:"傾向",r:"けいこう",m:"Xu hướng",jp:"最近の傾向を調べます。",vi:"Tìm hiểu xu hướng gần đây."},
-    {w:"貢献",r:"こうけん",m:"Đóng góp",jp:"社会に貢献したいです。",vi:"Tôi muốn đóng góp cho xã hội."}
-  ],
-  N1: [
-    {w:"懸念",r:"けねん",m:"Lo ngại",jp:"将来について懸念しています。",vi:"Tôi đang lo ngại về tương lai."},
-    {w:"顕著",r:"けんちょ",m:"Rõ rệt",jp:"大きな変化が顕著です。",vi:"Sự thay đổi lớn rất rõ rệt."},
-    {w:"遂行",r:"すいこう",m:"Thực hiện, hoàn thành",jp:"任務を遂行します。",vi:"Thực hiện nhiệm vụ."},
-    {w:"妥協",r:"だきょう",m:"Thỏa hiệp",jp:"簡単には妥協しません。",vi:"Tôi không dễ dàng thỏa hiệp."},
-    {w:"膨大",r:"ぼうだい",m:"Khổng lồ",jp:"膨大な情報があります。",vi:"Có lượng thông tin khổng lồ."}
-  ]
-};
+// Dữ liệu từ vựng được tải từ vocabulary.json
+let vocabulary = {};
 
 let currentLevel = "N5";
 let currentIndex = 0;
-let filteredWords = vocabulary[currentLevel];
+let filteredWords = [];
 
 function getLearned() {
-  return JSON.parse(localStorage.getItem("linguaLearned") || "{}");
+  try {
+    return JSON.parse(
+      localStorage.getItem("linguaLearned") || "{}"
+    );
+  } catch (error) {
+    return {};
+  }
 }
 
 function saveLearned(data) {
-  localStorage.setItem("linguaLearned", JSON.stringify(data));
+  localStorage.setItem(
+    "linguaLearned",
+    JSON.stringify(data)
+  );
 }
 
 function getKey(word) {
@@ -398,12 +365,17 @@ function getKey(word) {
 
 function updateStats() {
   const learned = getLearned();
-  const total = vocabulary[currentLevel].length;
-  const count = vocabulary[currentLevel].filter(
-    item => learned[getKey(item.w)]
+  const words = vocabulary[currentLevel] || [];
+
+  const total = words.length;
+
+  const count = words.filter(item =>
+    learned[getKey(item.w)]
   ).length;
 
-  const percent = total ? Math.round(count / total * 100) : 0;
+  const percent = total
+    ? Math.round(count / total * 100)
+    : 0;
 
   document.getElementById("total").textContent = total;
   document.getElementById("learned").textContent = count;
@@ -416,17 +388,23 @@ function renderWord() {
 
   if (!item) {
     document.getElementById("wordCard").classList.add("hidden");
-    document.getElementById("counter").textContent = "Không tìm thấy từ vựng.";
+    document.getElementById("counter").textContent =
+      "Không tìm thấy từ vựng.";
+    updateStats();
     return;
   }
 
   document.getElementById("wordCard").classList.remove("hidden");
-  document.getElementById("levelLabel").textContent = "JLPT " + currentLevel;
+
+  document.getElementById("levelLabel").textContent =
+    "JLPT " + currentLevel;
+
   document.getElementById("word").textContent = item.w;
   document.getElementById("reading").textContent = item.r;
   document.getElementById("meaning").textContent = item.m;
   document.getElementById("exampleJP").textContent = item.jp;
   document.getElementById("exampleVI").textContent = item.vi;
+
   document.getElementById("counter").textContent =
     (currentIndex + 1) + " / " + filteredWords.length;
 
@@ -440,69 +418,137 @@ function renderWord() {
 }
 
 function changeLevel(level) {
+  if (!vocabulary[level]) return;
+
   currentLevel = level;
   currentIndex = 0;
-  filteredWords = vocabulary[level];
 
   document.querySelectorAll(".level-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.level === level);
+    btn.classList.toggle(
+      "active",
+      btn.dataset.level === level
+    );
   });
 
   document.getElementById("search").value = "";
+
+  filteredWords = vocabulary[currentLevel] || [];
+
   renderWord();
 }
 
+// Chọn cấp độ JLPT
 document.querySelectorAll(".level-btn").forEach(btn => {
-  btn.addEventListener("click", () => changeLevel(btn.dataset.level));
+  btn.addEventListener("click", () => {
+    changeLevel(btn.dataset.level);
+  });
 });
 
+// Đánh dấu đã thuộc
 document.getElementById("knownBtn").addEventListener("click", () => {
   const item = filteredWords[currentIndex];
   if (!item) return;
 
   const learned = getLearned();
-  learned[getKey(item.w)] = !learned[getKey(item.w)];
+  learned[getKey(item.w)] = true;
+
   saveLearned(learned);
   renderWord();
 });
 
+// Đánh dấu chưa thuộc
 document.getElementById("unknownBtn").addEventListener("click", () => {
   const item = filteredWords[currentIndex];
   if (!item) return;
 
   const learned = getLearned();
   delete learned[getKey(item.w)];
+
   saveLearned(learned);
   renderWord();
 });
 
+// Từ tiếp theo
 document.getElementById("nextBtn").addEventListener("click", () => {
   if (!filteredWords.length) return;
-  currentIndex = (currentIndex + 1) % filteredWords.length;
+
+  currentIndex =
+    (currentIndex + 1) % filteredWords.length;
+
   renderWord();
 });
 
+// Từ trước
 document.getElementById("prevBtn").addEventListener("click", () => {
   if (!filteredWords.length) return;
+
   currentIndex =
-    (currentIndex - 1 + filteredWords.length) % filteredWords.length;
+    (currentIndex - 1 + filteredWords.length) %
+    filteredWords.length;
+
   renderWord();
 });
 
+// Tìm kiếm từ vựng
 document.getElementById("search").addEventListener("input", event => {
   const keyword = event.target.value.trim().toLowerCase();
 
-  filteredWords = vocabulary[currentLevel].filter(item =>
+  const words = vocabulary[currentLevel] || [];
+
+  filteredWords = words.filter(item =>
     item.w.toLowerCase().includes(keyword) ||
     item.r.toLowerCase().includes(keyword) ||
-    item.m.toLowerCase().includes(keyword)
+    item.m.toLowerCase().includes(keyword) ||
+    item.jp.toLowerCase().includes(keyword) ||
+    item.vi.toLowerCase().includes(keyword)
   );
 
   currentIndex = 0;
   renderWord();
 });
 
-renderWord();
+// Tải dữ liệu từ vocabulary.json
+async function loadVocabulary() {
+  try {
+    const response = await fetch("./vocabulary.json");
+
+    if (!response.ok) {
+      throw new Error("Không tìm thấy vocabulary.json");
+    }
+
+    const data = await response.json();
+
+    const levels = ["N5", "N4", "N3", "N2", "N1"];
+
+    for (const level of levels) {
+      if (!Array.isArray(data[level])) {
+        throw new Error("Dữ liệu " + level + " không hợp lệ");
+      }
+    }
+
+    vocabulary = data;
+    filteredWords = vocabulary[currentLevel];
+
+    renderWord();
+
+    console.log("Lingua Master: Đã tải từ vựng thành công!");
+
+  } catch (error) {
+    console.error(error);
+
+    document.getElementById("wordCard").classList.add("hidden");
+
+    document.getElementById("counter").textContent =
+      "Lỗi tải từ vựng. Hãy kiểm tra file vocabulary.json.";
+
+    document.getElementById("total").textContent = "0";
+    document.getElementById("learned").textContent = "0";
+    document.getElementById("percent").textContent = "0%";
+    document.getElementById("progress").style.width = "0%";
+  }
+}
+
+loadVocabulary();
 </script>
 
 </body>
