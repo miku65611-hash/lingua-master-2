@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -5,53 +6,322 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1769e0">
 <title>Lingua Master 2.0</title>
+
 <style>
-:root{--blue:#1769e0;--light:#eef5ff;--text:#17243a;--muted:#718096;--green:#16a36a;--red:#e34d59;--border:#dce7f8}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fc;color:var(--text)}
-header{background:linear-gradient(135deg,#1769e0,#4894ff);color:#fff;padding:25px 20px;border-radius:0 0 25px 25px}
-header h1{margin:0;font-size:25px}
-header p{margin:8px 0 0;opacity:.9}
-.container{max-width:700px;margin:auto;padding:18px}
-.section-title{font-size:19px;font-weight:bold;margin:24px 0 12px}
-.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.level-btn{border:1px solid var(--border);background:#fff;padding:13px 3px;border-radius:12px;font-weight:bold;color:var(--blue)}
-.level-btn.active{background:var(--blue);color:#fff}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.stat-card{background:#fff;padding:17px;border-radius:15px;box-shadow:0 3px 12px #17243a0a}
-.stat-card strong{display:block;font-size:25px;color:var(--blue);margin-top:5px}
-.progress-bg{height:10px;background:#e2eaf5;border-radius:20px;margin-top:12px;overflow:hidden}
-.progress-bar{height:100%;background:var(--green);width:0;transition:.3s}
-.search{width:100%;padding:14px;border:1px solid #dce5f2;border-radius:12px;margin-top:10px;font-size:15px;outline:none;background:#fff}
-.search:focus{border-color:var(--blue)}
-label{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
-.card{background:#fff;padding:24px 18px;margin-top:15px;border-radius:20px;box-shadow:0 5px 20px #17243a0d;text-align:center}
-.card-label{color:var(--muted);font-size:13px}
-.word{font-size:36px;font-weight:bold;margin:15px 0 5px;color:var(--blue)}
-.reading{font-size:18px;color:var(--muted)}
-.speak{background:none;border:none;font-size:22px;margin-top:6px}
-.meaning{font-size:22px;font-weight:bold;margin:18px 0}
-.example{background:var(--light);border-radius:12px;padding:14px;text-align:left;line-height:1.7;margin-top:18px}
-.example small{color:var(--muted)}
-button{cursor:pointer;font-size:14px}
-.flip-btn{background:var(--light);color:var(--blue);border:1px solid var(--border);padding:12px 20px;border-radius:12px;margin-top:18px;font-weight:bold;width:100%}
-.buttons,.navigation{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.action-btn{padding:14px 8px;border:none;border-radius:12px;color:#fff;font-weight:bold}
-.known{background:var(--green)}
-.unknown{background:var(--red)}
-.secondary{background:#fff;color:var(--blue);border:1px solid var(--border);padding:13px;border-radius:12px;font-weight:bold}
-.counter{text-align:center;color:var(--muted);margin-top:14px;font-size:13px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--light);padding:12px 14px;margin-top:8px;border-radius:12px}
-.row.clickable{cursor:pointer}
-.row .info{min-width:0}
-.row small{color:var(--muted)}
-.del{background:var(--red);color:#fff;border:none;border-radius:8px;padding:8px 10px}
-.msg{min-height:20px;margin:10px 0 0;font-size:14px}
-footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
-.hidden{display:none!important}
-@media(max-width:380px){.word{font-size:30px}}
+:root {
+  --blue: #1769e0;
+  --dark: #124da8;
+  --light: #eef5ff;
+  --white: #ffffff;
+  --text: #17243a;
+  --muted: #718096;
+  --green: #16a36a;
+  --red: #e34d59;
+  --border: #dce7f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fc;
+  color: var(--text);
+}
+
+header {
+  background: linear-gradient(135deg, var(--blue), #4894ff);
+  color: white;
+  padding: 28px 20px;
+  border-radius: 0 0 25px 25px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+header p {
+  margin: 8px 0 0;
+  opacity: .9;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 18px;
+}
+
+.section-title {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 25px 0 12px;
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.level-btn {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 13px 3px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.level-btn.active {
+  background: var(--blue);
+  color: white;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.stat-card {
+  background: white;
+  padding: 17px;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px #17243a0a;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 25px;
+  color: var(--blue);
+  margin-top: 5px;
+}
+
+.progress-bg {
+  height: 10px;
+  background: #e2eaf5;
+  border-radius: 20px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  transition: width .3s;
+}
+
+.search {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+
+.search:focus {
+  border-color: var(--blue);
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card {
+  background: white;
+  padding: 25px 18px;
+  margin-top: 15px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px #17243a0d;
+  text-align: center;
+}
+
+.card-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.word {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 18px 0 5px;
+  color: var(--blue);
+  overflow-wrap: anywhere;
+}
+
+.reading {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.meaning {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.example {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: left;
+  line-height: 1.7;
+  margin-top: 18px;
+}
+
+.example small {
+  color: var(--muted);
+}
+
+button {
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  opacity: .8;
+  transform: scale(.98);
+}
+
+.flip-btn {
+  background: var(--light);
+  color: var(--blue);
+  border: 1px solid var(--border);
+  padding: 13px;
+  border-radius: 12px;
+  margin-top: 20px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.buttons,
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.action-btn {
+  padding: 14px 8px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.known {
+  background: var(--green);
+}
+
+.unknown {
+  background: var(--red);
+}
+
+.secondary {
+  background: white;
+  color: var(--blue);
+  border: 1px solid var(--border);
+  padding: 13px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.counter {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: var(--light);
+  padding: 12px 14px;
+  margin-top: 8px;
+  border-radius: 12px;
+}
+
+.row.clickable {
+  cursor: pointer;
+}
+
+.row .info {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.row small {
+  color: var(--muted);
+}
+
+.del {
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 12px;
+  flex-shrink: 0;
+}
+
+.msg {
+  min-height: 20px;
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px 5px;
+  font-size: 14px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 22px 0;
+}
+
+@media(max-width:380px) {
+  .word {
+    font-size: 30px;
+  }
+
+  .container {
+    padding: 14px;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -61,7 +331,9 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
 
 <main class="container">
 
+  <!-- LEVEL -->
   <div class="section-title">Chọn cấp độ JLPT</div>
+
   <div class="levels" id="levels">
     <button class="level-btn active" data-level="N5">N5</button>
     <button class="level-btn" data-level="N4">N4</button>
@@ -70,9 +342,17 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
     <button class="level-btn" data-level="N1">N1</button>
   </div>
 
+  <!-- STATISTICS -->
   <div class="stats">
-    <div class="stat-card"><span>Tổng từ vựng</span><strong id="total">0</strong></div>
-    <div class="stat-card"><span>Đã thuộc</span><strong id="learned">0</strong></div>
+    <div class="stat-card">
+      <span>Tổng từ vựng</span>
+      <strong id="total">0</strong>
+    </div>
+
+    <div class="stat-card">
+      <span>Đã thuộc</span>
+      <strong id="learned">0</strong>
+    </div>
   </div>
 
   <div class="stat-card" style="margin-top:12px">
@@ -80,24 +360,39 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
       <span>Tiến độ học tập</span>
       <strong id="percent" style="font-size:16px;margin:0">0%</strong>
     </div>
-    <div class="progress-bg"><div class="progress-bar" id="progress"></div></div>
+
+    <div class="progress-bg">
+      <div class="progress-bar" id="progress"></div>
+    </div>
   </div>
 
   <!-- FLASHCARD -->
   <div class="section-title">📚 Học từ vựng</div>
-  <input class="search" id="search" type="search" placeholder="Tìm từ tiếng Nhật hoặc nghĩa tiếng Việt...">
+
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Tìm từ tiếng Nhật hoặc nghĩa tiếng Việt..."
+  >
+
   <select class="search" id="filterMode">
     <option value="all">Học tất cả từ</option>
     <option value="unlearned">Chỉ học từ chưa thuộc</option>
   </select>
 
   <div class="card" id="wordCard">
-    <div class="card-label" id="levelLabel">JLPT N5</div>
-    <div class="word" id="word">…</div>
-    <div class="reading" id="reading"></div>
-    <button class="speak" id="speakBtn" aria-label="Phát âm">🔊</button>
 
-    <button class="flip-btn" id="flipBtn">👁 Hiện đáp án</button>
+    <div class="card-label" id="levelLabel">JLPT N5</div>
+
+    <div class="word" id="word">Đang tải...</div>
+
+    <div class="reading" id="reading"></div>
+
+    <button class="flip-btn" id="flipBtn">
+      👁 Hiện đáp án
+    </button>
+
     <div class="meaning" id="meaning"></div>
 
     <div class="example" id="exampleBox">
@@ -106,20 +401,42 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
     </div>
 
     <div class="buttons">
-      <button class="action-btn known" id="knownBtn">✓ Đánh dấu đã thuộc</button>
-      <button class="action-btn unknown" id="unknownBtn">↻ Chưa thuộc</button>
+      <button class="action-btn known" id="knownBtn">
+        ✓ Đã thuộc
+      </button>
+
+      <button class="action-btn unknown" id="unknownBtn">
+        ↻ Chưa thuộc
+      </button>
     </div>
+
     <div class="navigation">
-      <button class="secondary" id="prevBtn">← Trước</button>
-      <button class="secondary" id="nextBtn">Tiếp theo →</button>
+      <button class="secondary" id="prevBtn">
+        ← Trước
+      </button>
+
+      <button class="secondary" id="nextBtn">
+        Tiếp theo →
+      </button>
     </div>
+
   </div>
-  <div class="counter" id="counter">Đang tải…</div>
+
+  <div class="counter" id="counter">Đang tải dữ liệu...</div>
 
   <!-- VOCABULARY LIST -->
   <div class="section-title">📖 Danh sách từ vựng</div>
+
   <div class="stat-card">
-    <input class="search" id="listSearch" type="search" style="margin-top:0" placeholder="Tìm từ Nhật, cách đọc hoặc nghĩa...">
+
+    <input
+      class="search"
+      id="listSearch"
+      type="search"
+      style="margin-top:0"
+      placeholder="Tìm từ Nhật, cách đọc hoặc nghĩa..."
+    >
+
     <select class="search" id="listLevel">
       <option value="ALL">Tất cả cấp độ</option>
       <option value="N5">JLPT N5</option>
@@ -128,14 +445,28 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
       <option value="N2">JLPT N2</option>
       <option value="N1">JLPT N1</option>
     </select>
-    <div id="listCount" style="margin-top:15px;color:var(--muted)">Tổng: 0 từ</div>
+
+    <div id="listCount" style="margin-top:15px;color:var(--muted)">
+      Tổng: 0 từ
+    </div>
+
     <div id="vocabularyList"></div>
-    <button class="secondary hidden" id="moreBtn" style="width:100%;margin-top:12px">Xem thêm</button>
+
+    <button
+      class="secondary hidden"
+      id="moreBtn"
+      style="width:100%;margin-top:12px"
+    >
+      Xem thêm
+    </button>
+
   </div>
 
-  <!-- MY VOCABULARY -->
+  <!-- PERSONAL VOCABULARY -->
   <div class="section-title">⭐ Từ vựng của tôi</div>
+
   <div class="stat-card">
+
     <h3 style="margin-top:0">➕ Thêm từ vựng mới</h3>
 
     <label for="customWord">Từ tiếng Nhật</label>
@@ -147,13 +478,14 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
     <label for="customMeaning">Nghĩa tiếng Việt</label>
     <input class="search" id="customMeaning" placeholder="Ví dụ: Học tập">
 
-    <label for="customExampleJP">Câu ví dụ tiếng Nhật (không bắt buộc)</label>
+    <label for="customExampleJP">Câu ví dụ tiếng Nhật</label>
     <input class="search" id="customExampleJP" placeholder="毎日、日本語を勉強します。">
 
-    <label for="customExampleVI">Dịch nghĩa câu ví dụ (không bắt buộc)</label>
+    <label for="customExampleVI">Dịch nghĩa câu ví dụ</label>
     <input class="search" id="customExampleVI" placeholder="Mỗi ngày tôi học tiếng Nhật.">
 
     <label for="customLevel">Cấp độ JLPT</label>
+
     <select class="search" id="customLevel">
       <option value="N5">N5</option>
       <option value="N4">N4</option>
@@ -162,98 +494,227 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
       <option value="N1">N1</option>
     </select>
 
-    <button class="action-btn known" id="addCustomWord" style="width:100%;margin-top:15px">+ Lưu từ vựng</button>
+    <button
+      class="action-btn known"
+      id="addCustomWord"
+      style="width:100%;margin-top:15px"
+    >
+      + Lưu từ vựng
+    </button>
+
     <p class="msg" id="customMessage"></p>
 
-    <div class="buttons">
-      <button class="secondary" id="exportBtn">⬇ Xuất sao lưu</button>
-      <button class="secondary" id="importBtn">⬆ Nhập sao lưu</button>
-    </div>
-    <input type="file" id="importFile" accept=".json,application/json" class="hidden">
-
     <hr>
+
     <h3>📚 Từ vựng đã thêm</h3>
     <div id="customWordList"></div>
+
   </div>
 
+  <!-- GUIDE -->
   <div class="section-title">💡 Cách học hiệu quả</div>
+
   <div class="stat-card">
     1. Đọc từ tiếng Nhật và Hiragana.<br><br>
     2. Tự nhớ nghĩa tiếng Việt trước khi xem.<br><br>
     3. Đọc câu ví dụ thành tiếng.<br><br>
     4. Đánh dấu những từ đã thuộc.<br><br>
-    5. Ôn lại những từ chưa nhớ.<br><br>
-    <small style="color:var(--muted)">Phím tắt: ← → chuyển từ, Space hiện/ẩn đáp án.</small>
+    5. Ôn lại những từ chưa nhớ.
   </div>
+
 </main>
 
-<footer>Lingua Master 2.0 · Learn Japanese every day</footer>
+<footer>
+  Lingua Master 2.0 · Learn Japanese every day
+</footer>
 
 <script>
 "use strict";
 
+/* =========================
+   CẤU HÌNH
+========================= */
+
 const LEVELS = ["N5", "N4", "N3", "N2", "N1"];
+
 const K_LEARNED = "linguaLearned";
 const K_CUSTOM = "linguaCustomWords";
+
 const PAGE_SIZE = 50;
 
 const $ = id => document.getElementById(id);
 
-let base = {};          // dữ liệu từ vocabulary.json
-let vocabulary = {};    // base + từ cá nhân
+let base = {};
+let vocabulary = {};
+
 let level = "N5";
 let index = 0;
 let filtered = [];
 let answerShown = false;
 let listLimit = PAGE_SIZE;
+let dataLoaded = false;
 
-/* ---------- Lưu trữ ---------- */
+
+/* =========================
+   LƯU TRỮ AN TOÀN
+========================= */
+
 function read(key, fallback) {
   try {
-    const v = JSON.parse(localStorage.getItem(key));
-    return v ?? fallback;
-  } catch { return fallback; }
+    const value = JSON.parse(localStorage.getItem(key));
+    return value ?? fallback;
+  } catch {
+    return fallback;
+  }
 }
-function write(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-  catch { alert("Không thể lưu dữ liệu trên trình duyệt này!"); return false; }
-}
-const keyOf = (lv, w) => lv + "_" + w;
-const matches = (it, kw) =>
-  !kw || [it.w, it.r, it.m, it.jp, it.vi].some(v => (v || "").toLowerCase().includes(kw));
 
-/* ---------- Dữ liệu ---------- */
+function write(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    alert("Không thể lưu dữ liệu. Bộ nhớ trình duyệt có thể đã đầy.");
+    return false;
+  }
+}
+
+function keyOf(lv, word) {
+  return lv + "_" + word;
+}
+
+function safeString(value) {
+  return typeof value === "string" ? value : "";
+}
+
+function getCustomWords() {
+  const data = read(K_CUSTOM, []);
+  return Array.isArray(data) ? data : [];
+}
+
+function getLearned() {
+  const data = read(K_LEARNED, {});
+  return data && typeof data === "object" && !Array.isArray(data)
+    ? data
+    : {};
+}
+
+function matches(item, keyword) {
+  if (!keyword) return true;
+
+  return [
+    item.w,
+    item.r,
+    item.m,
+    item.jp,
+    item.vi
+  ].some(value =>
+    safeString(value).toLowerCase().includes(keyword)
+  );
+}
+
+
+/* =========================
+   KIỂM TRA DỮ LIỆU
+========================= */
+
+function normalizeWord(item, lv) {
+  if (!item || typeof item !== "object") return null;
+
+  const w = safeString(item.w).trim();
+  const r = safeString(item.r).trim();
+  const m = safeString(item.m).trim();
+
+  if (!w || !r || !m) return null;
+
+  return {
+    w,
+    r,
+    m,
+    jp: safeString(item.jp),
+    vi: safeString(item.vi),
+    level: lv
+  };
+}
+
 function rebuild() {
-  const custom = read(K_CUSTOM, []);
+  vocabulary = {};
+
+  const custom = getCustomWords();
+
   LEVELS.forEach(lv => {
-    const b = base[lv] || [];
-    const seen = new Set(b.map(x => x.w.toLowerCase()));
+    const original = Array.isArray(base[lv]) ? base[lv] : [];
+
+    const words = original
+      .map(item => normalizeWord(item, lv))
+      .filter(Boolean);
+
+    const seen = new Set(
+      words.map(item => item.w.toLowerCase())
+    );
+
     const extra = custom
-      .filter(c => c.level === lv && !seen.has(c.w.toLowerCase()))
-      .map(c => ({ ...c, custom: true }));
-    vocabulary[lv] = b.concat(extra);
+      .filter(item =>
+        item &&
+        item.level === lv &&
+        typeof item.w === "string" &&
+        typeof item.r === "string" &&
+        typeof item.m === "string"
+      )
+      .filter(item => !seen.has(item.w.trim().toLowerCase()))
+      .map(item => ({
+        ...item,
+        custom: true
+      }));
+
+    vocabulary[lv] = words.concat(extra);
   });
 }
 
+
+/* =========================
+   LỌC TỪ VỰNG
+========================= */
+
 function applyFilter(keepWord) {
-  const kw = $("search").value.trim().toLowerCase();
-  const onlyNew = $("filterMode").value === "unlearned";
-  const learned = read(K_LEARNED, {});
+  const keyword = $("search").value.trim().toLowerCase();
 
-  filtered = (vocabulary[level] || []).filter(it =>
-    (!onlyNew || !learned[keyOf(level, it.w)]) && matches(it, kw)
-  );
+  const onlyNew =
+    $("filterMode").value === "unlearned";
 
-  const i = keepWord ? filtered.findIndex(it => it.w === keepWord) : -1;
-  index = i >= 0 ? i : 0;
+  const learned = getLearned();
+
+  filtered = (vocabulary[level] || []).filter(item => {
+    const notLearned = !learned[keyOf(level, item.w)];
+
+    return (
+      (!onlyNew || notLearned) &&
+      matches(item, keyword)
+    );
+  });
+
+  const found = keepWord
+    ? filtered.findIndex(item => item.w === keepWord)
+    : -1;
+
+  index = found >= 0 ? found : 0;
 }
 
-/* ---------- Thống kê ---------- */
+
+/* =========================
+   THỐNG KÊ
+========================= */
+
 function updateStats() {
-  const learned = read(K_LEARNED, {});
+  const learned = getLearned();
   const words = vocabulary[level] || [];
-  const count = words.filter(it => learned[keyOf(level, it.w)]).length;
-  const percent = words.length ? Math.round(count / words.length * 100) : 0;
+
+  const count = words.filter(item =>
+    learned[keyOf(level, item.w)]
+  ).length;
+
+  const percent = words.length
+    ? Math.round(count / words.length * 100)
+    : 0;
 
   $("total").textContent = words.length;
   $("learned").textContent = count;
@@ -261,299 +722,341 @@ function updateStats() {
   $("progress").style.width = percent + "%";
 }
 
-/* ---------- Flashcard ---------- */
+
+/* =========================
+   FLASHCARD
+========================= */
+
 function renderWord() {
   const item = filtered[index];
+
   updateStats();
 
   if (!item) {
     $("wordCard").classList.add("hidden");
-    $("counter").textContent = "Không có từ vựng phù hợp.";
+
+    $("counter").textContent =
+      dataLoaded
+        ? "Không có từ vựng phù hợp."
+        : "Không thể tải dữ liệu từ vựng.";
+
     return;
   }
 
   $("wordCard").classList.remove("hidden");
-  $("levelLabel").textContent = "JLPT " + level + (item.custom ? " · ⭐ Từ của tôi" : "");
+
+  $("levelLabel").textContent =
+    "JLPT " + level +
+    (item.custom ? " · ⭐ Từ của tôi" : "");
+
   $("word").textContent = item.w;
   $("reading").textContent = item.r;
   $("meaning").textContent = item.m;
+
   $("exampleJP").textContent = item.jp || "";
   $("exampleVI").textContent = item.vi || "";
-  $("exampleBox").classList.toggle("hidden", !item.jp);
+
+  $("exampleBox").classList.toggle(
+    "hidden",
+    !item.jp && !item.vi
+  );
 
   setAnswer(false);
 
-  const isLearned = !!read(K_LEARNED, {})[keyOf(level, item.w)];
-  $("knownBtn").textContent = isLearned ? "✓ Đã thuộc" : "✓ Đánh dấu đã thuộc";
-  $("counter").textContent = (index + 1) + " / " + filtered.length;
+  const learned = getLearned();
+
+  $("knownBtn").textContent =
+    learned[keyOf(level, item.w)]
+      ? "✓ Đã thuộc"
+      : "✓ Đánh dấu đã thuộc";
+
+  $("counter").textContent =
+    (index + 1) + " / " + filtered.length;
 }
 
 function setAnswer(show) {
   answerShown = show;
-  $("meaning").style.display = show ? "block" : "none";
-  $("exampleVI").style.display = show ? "block" : "none";
-  $("flipBtn").textContent = show ? "🙈 Ẩn đáp án" : "👁 Hiện đáp án";
+
+  $("meaning").style.display =
+    show ? "block" : "none";
+
+  $("exampleVI").style.display =
+    show ? "block" : "none";
+
+  $("flipBtn").textContent =
+    show ? "🙈 Ẩn đáp án" : "👁 Hiện đáp án";
 }
 
 function move(step) {
   if (!filtered.length) return;
-  index = (index + step + filtered.length) % filtered.length;
+
+  index =
+    (index + step + filtered.length) %
+    filtered.length;
+
   renderWord();
 }
 
 function changeLevel(lv, keepWord) {
-  if (!vocabulary[lv]) return;
+  if (!LEVELS.includes(lv)) return;
+
   level = lv;
-  document.querySelectorAll(".level-btn").forEach(b =>
-    b.classList.toggle("active", b.dataset.level === lv)
-  );
+
+  document.querySelectorAll(".level-btn").forEach(btn => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.level === lv
+    );
+  });
+
   $("search").value = "";
+
   applyFilter(keepWord);
   renderWord();
 }
 
-function speak() {
-  const item = filtered[index];
-  if (!item || !("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(item.r || item.w);
-  u.lang = "ja-JP";
-  speechSynthesis.speak(u);
-}
 
-/* ---------- Danh sách từ vựng ---------- */
+/* =========================
+   DANH SÁCH TỪ VỰNG
+========================= */
+
 function renderList() {
-  const kw = $("listSearch").value.trim().toLowerCase();
-  const lv = $("listLevel").value;
-  const learned = read(K_LEARNED, {});
-  const levels = lv === "ALL" ? LEVELS : [lv];
+  const keyword =
+    $("listSearch").value.trim().toLowerCase();
+
+  const selectedLevel = $("listLevel").value;
+
+  const learned = getLearned();
+
+  const selectedLevels =
+    selectedLevel === "ALL"
+      ? LEVELS
+      : [selectedLevel];
 
   const all = [];
-  levels.forEach(l => (vocabulary[l] || []).forEach(it => {
-    if (matches(it, kw)) all.push({ ...it, level: l });
-  }));
 
-  $("listCount").textContent = "Tổng: " + all.length + " từ";
+  selectedLevels.forEach(lv => {
+    (vocabulary[lv] || []).forEach(item => {
+      if (matches(item, keyword)) {
+        all.push({
+          ...item,
+          level: lv
+        });
+      }
+    });
+  });
+
+  $("listCount").textContent =
+    "Tổng: " + all.length + " từ";
 
   const box = $("vocabularyList");
-  box.textContent = "";
-  const frag = document.createDocumentFragment();
 
-  all.slice(0, listLimit).forEach(it => {
+  box.textContent = "";
+
+  const fragment = document.createDocumentFragment();
+
+  all.slice(0, listLimit).forEach(item => {
     const row = document.createElement("div");
+
     row.className = "row clickable";
 
     const info = document.createElement("div");
     info.className = "info";
+
     const title = document.createElement("strong");
-    title.textContent = it.w + " (" + it.r + ")";
+
+    title.textContent =
+      item.w + " (" + item.r + ")";
+
     const meaning = document.createElement("div");
-    meaning.textContent = it.m;
-    const lvl = document.createElement("small");
-    lvl.textContent = "JLPT " + it.level;
-    info.append(title, meaning, lvl);
+    meaning.textContent = item.m;
+
+    const lv = document.createElement("small");
+    lv.textContent = "JLPT " + item.level;
+
+    info.append(title, meaning, lv);
 
     const mark = document.createElement("span");
-    mark.textContent = learned[keyOf(it.level, it.w)] ? "✅" : "";
+
+    mark.textContent =
+      learned[keyOf(item.level, item.w)]
+        ? "✅"
+        : "";
 
     row.append(info, mark);
+
     row.addEventListener("click", () => {
-      changeLevel(it.level, it.w);
-      $("wordCard").scrollIntoView({ behavior: "smooth", block: "center" });
+      changeLevel(item.level, item.w);
+
+      $("wordCard").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     });
-    frag.appendChild(row);
+
+    fragment.appendChild(row);
   });
 
-  box.appendChild(frag);
-  $("moreBtn").classList.toggle("hidden", all.length <= listLimit);
+  box.appendChild(fragment);
+
+  $("moreBtn").classList.toggle(
+    "hidden",
+    all.length <= listLimit
+  );
+
+  if (!all.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Không tìm thấy từ vựng.";
+    box.appendChild(empty);
+  }
 }
 
-/* ---------- Từ vựng cá nhân ---------- */
+
+/* =========================
+   TỪ VỰNG CÁ NHÂN
+========================= */
+
+function showMessage(message, color) {
+  $("customMessage").textContent = message;
+  $("customMessage").style.color = color;
+}
+
 function renderCustomWords() {
-  const words = read(K_CUSTOM, []);
+  const words = getCustomWords();
+
   const list = $("customWordList");
+
   list.textContent = "";
 
   if (!words.length) {
-    list.textContent = "Chưa có từ vựng cá nhân.";
+    list.textContent =
+      "Chưa có từ vựng cá nhân.";
     return;
   }
 
   words.forEach(item => {
     const row = document.createElement("div");
+
     row.className = "row";
 
     const info = document.createElement("div");
     info.className = "info";
+
     const title = document.createElement("strong");
-    title.textContent = item.w + " (" + item.r + ")";
+
+    title.textContent =
+      item.w + " (" + item.r + ")";
+
     const meaning = document.createElement("div");
     meaning.textContent = item.m;
-    const lvl = document.createElement("small");
-    lvl.textContent = "JLPT " + item.level;
-    info.append(title, meaning, lvl);
+
+    const lv = document.createElement("small");
+    lv.textContent = "JLPT " + item.level;
+
+    info.append(title, meaning, lv);
 
     const del = document.createElement("button");
+
     del.className = "del";
     del.textContent = "Xóa";
-    del.addEventListener("click", () => deleteCustom(item.id));
+
+    del.addEventListener("click", () => {
+      deleteCustom(item.id);
+    });
 
     row.append(info, del);
+
     list.appendChild(row);
   });
 }
 
-function showMessage(text, color) {
-  const m = $("customMessage");
-  m.textContent = text;
-  m.style.color = color;
-}
-
 function addCustom() {
+  if (!dataLoaded) {
+    return showMessage(
+      "⚠️ Dữ liệu chưa tải xong.",
+      "#e34d59"
+    );
+  }
+
   const w = $("customWord").value.trim();
   const r = $("customReading").value.trim();
   const m = $("customMeaning").value.trim();
+
   const jp = $("customExampleJP").value.trim();
   const vi = $("customExampleVI").value.trim();
+
   const lv = $("customLevel").value;
 
   if (!w || !r || !m) {
-    return showMessage("⚠️ Hãy nhập từ, cách đọc và nghĩa!", "#e34d59");
+    return showMessage(
+      "⚠️ Hãy nhập từ, cách đọc và nghĩa.",
+      "#e34d59"
+    );
   }
 
-  const exists = (vocabulary[lv] || []).some(it => it.w.toLowerCase() === w.toLowerCase());
-  if (exists) return showMessage("⚠️ Từ này đã tồn tại!", "#e34d59");
+  if (!LEVELS.includes(lv)) {
+    return showMessage(
+      "⚠️ Cấp độ không hợp lệ.",
+      "#e34d59"
+    );
+  }
 
-  const custom = read(K_CUSTOM, []);
-  custom.push({ id: Date.now().toString(), w, r, m, jp, vi, level: lv });
+  const exists = (vocabulary[lv] || []).some(item =>
+    item.w.toLowerCase() === w.toLowerCase()
+  );
+
+  if (exists) {
+    return showMessage(
+      "⚠️ Từ này đã tồn tại.",
+      "#e34d59"
+    );
+  }
+
+  const custom = getCustomWords();
+
+  custom.push({
+    id: Date.now().toString() +
+      Math.random().toString(36).slice(2, 7),
+    w,
+    r,
+    m,
+    jp,
+    vi,
+    level: lv
+  });
+
   if (!write(K_CUSTOM, custom)) return;
 
   rebuild();
+
   if (level === lv) {
     applyFilter(w);
     renderWord();
   }
 
-  ["customWord", "customReading", "customMeaning", "customExampleJP", "customExampleVI"]
-    .forEach(id => { $(id).value = ""; });
+  [
+    "customWord",
+    "customReading",
+    "customMeaning",
+    "customExampleJP",
+    "customExampleVI"
+  ].forEach(id => {
+    $(id).value = "";
+  });
 
-  showMessage("✅ Đã lưu từ vựng thành công!", "#16a36a");
+  showMessage(
+    "✅ Đã lưu từ vựng thành công!",
+    "#16a36a"
+  );
+
   renderCustomWords();
   renderList();
 }
 
 function deleteCustom(id) {
-  if (!confirm("Xóa từ vựng này?")) return;
-  const custom = read(K_CUSTOM, []).filter(c => c.id !== id);
-  if (!write(K_CUSTOM, custom)) return;
-
-  rebuild();
-  applyFilter();
-  renderWord();
-  renderCustomWords();
-  renderList();
-}
-
-/* ---------- Sao lưu: xuất / nhập ---------- */
-function exportCustom() {
-  const blob = new Blob(
-    [JSON.stringify(read(K_CUSTOM, []), null, 2)],
-    { type: "application/json" }
-  );
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "tu-vung-cua-toi.json";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  showMessage("✅ Đã xuất file sao lưu!", "#16a36a");
-}
-
-async function importCustom(file) {
-  try {
-    const data = JSON.parse(await file.text());
-    if (!Array.isArray(data)) throw new Error("bad");
-    const cur = read(K_CUSTOM, []);
-
-    data.forEach(d => {
-      const valid = d && d.w && d.r && d.m && LEVELS.includes(d.level);
-      const dup = valid && cur.some(c =>
-        c.w.toLowerCase() === String(d.w).toLowerCase() && c.level === d.level
-      );
-      if (valid && !dup) {
-        cur.push({
-          id: Date.now() + Math.random().toString(36).slice(2, 6),
-          w: d.w, r: d.r, m: d.m,
-          jp: d.jp || "", vi: d.vi || "", level: d.level
-        });
-      }
-    });
-
-    if (!write(K_CUSTOM, cur)) return;
-    rebuild();
-    applyFilter();
-    renderWord();
-    renderCustomWords();
-    renderList();
-    showMessage("✅ Đã nhập sao lưu!", "#16a36a");
-  } catch {
-    showMessage("⚠️ File không hợp lệ!", "#e34d59");
+  if (!confirm("Bạn có chắc muốn xóa từ này?")) {
+    return;
   }
-}
 
-/* ---------- Sự kiện ---------- */
-function bindEvents() {
-  document.querySelectorAll(".level-btn").forEach(btn =>
-    btn.addEventListener("click", () => changeLevel(btn.dataset.level))
-  );
-
-  $("search").addEventListener("input", () => { applyFilter(); renderWord(); });
-  $("filterMode").addEventListener("change", () => { applyFilter(); renderWord(); });
-
-  $("flipBtn").addEventListener("click", () => setAnswer(!answerShown));
-  $("speakBtn").addEventListener("click", speak);
-  $("prevBtn").addEventListener("click", () => move(-1));
-  $("nextBtn").addEventListener("click", () => move(1));
-
-  $("knownBtn").addEventListener("click", () => {
-    const item = filtered[index];
-    if (!item) return;
-    const learned = read(K_LEARNED, {});
-    learned[keyOf(level, item.w)] = true;
-    write(K_LEARNED, learned);
-    if (index < filtered.length - 1) index++;
-    renderWord();
-    renderList();
-  });
-
-  $("unknownBtn").addEventListener("click", () => {
-    const item = filtered[index];
-    if (!item) return;
-    const learned = read(K_LEARNED, {});
-    delete learned[keyOf(level, item.w)];
-    write(K_LEARNED, learned);
-    renderList();
-    move(1);
-  });
-
-  $("listSearch").addEventListener("input", () => { listLimit = PAGE_SIZE; renderList(); });
-  $("listLevel").addEventListener("change", () => { listLimit = PAGE_SIZE; renderList(); });
-  $("moreBtn").addEventListener("click", () => { listLimit += PAGE_SIZE; renderList(); });
-
-  $("addCustomWord").addEventListener("click", addCustom);
-
-  $("exportBtn").addEventListener("click", exportCustom);
-  $("importBtn").addEventListener("click", () => $("importFile").click());
-  $("importFile").addEventListener("change", e => {
-    if (e.target.files[0]) importCustom(e.target.files[0]);
-    e.target.value = "";
-  });
-
-  document.addEventListener("keydown", e => {
-    if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
-    if (e.key === "ArrowRight") move(1);
-    else if (e.key === "ArrowLeft") move(-1);
-    else if (e.key === " ") { e.preventDefault(); setAnswer(!answerShown); }
-  });
-  
+  const old
