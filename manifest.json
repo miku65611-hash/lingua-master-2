@@ -1,0 +1,22 @@
+
+{
+  "id": "/lingua-master-2/",
+  "name": "Lingua Master 2.0",
+  "short_name": "Lingua Master",
+  "description": "Ứng dụng học từ vựng ngoại ngữ, luyện tập và ghi nhớ từ vựng.",
+  "lang": "vi",
+  "start_url": "/lingua-master-2/",
+  "scope": "/lingua-master-2/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#1769e0",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
