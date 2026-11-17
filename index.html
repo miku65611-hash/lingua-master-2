@@ -754,6 +754,41 @@ document.getElementById("addCustomWord").addEventListener("click", () => {
 renderCustomWords();
 
 // ===== END MY VOCABULARY SYSTEM =====
+  
+<!-- VOCABULARY LIST -->
+<div class="section-title">📖 Vocabulary List</div>
+
+<div class="stat-card" id="vocabularyListSection">
+
+  <h3>Danh sách từ vựng</h3>
+
+  <input
+    class="search"
+    id="listSearch"
+    type="search"
+    placeholder="Tìm từ Nhật, cách đọc hoặc nghĩa..."
+  >
+
+  <select class="search" id="listLevel">
+    <option value="ALL">Tất cả cấp độ</option>
+    <option value="N5">JLPT N5</option>
+    <option value="N4">JLPT N4</option>
+    <option value="N3">JLPT N3</option>
+    <option value="N2">JLPT N2</option>
+    <option value="N1">JLPT N1</option>
+  </select>
+
+  <div id="vocabularyListCount"
+       style="margin-top:15px;color:#718096">
+    Tổng: 0 từ
+  </div>
+
+  <div id="vocabularyList">
+    Đang tải danh sách...
+  </div>
+
+</div>
+<!-- END VOCABULARY LIST -->  
   // Tải dữ liệu từ vocabulary.json
 async function loadVocabulary() {
   try {
