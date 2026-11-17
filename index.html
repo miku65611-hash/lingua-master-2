@@ -165,6 +165,12 @@ footer{text-align:center;padding:30px 10px;color:var(--muted);font-size:12px}
     <button class="action-btn known" id="addCustomWord" style="width:100%;margin-top:15px">+ Lưu từ vựng</button>
     <p class="msg" id="customMessage"></p>
 
+    <div class="buttons">
+      <button class="secondary" id="exportBtn">⬇ Xuất sao lưu</button>
+      <button class="secondary" id="importBtn">⬆ Nhập sao lưu</button>
+    </div>
+    <input type="file" id="importFile" accept=".json,application/json" class="hidden">
+
     <hr>
     <h3>📚 Từ vựng đã thêm</h3>
     <div id="customWordList"></div>
@@ -448,6 +454,54 @@ function deleteCustom(id) {
   renderList();
 }
 
+/* ---------- Sao lưu: xuất / nhập ---------- */
+function exportCustom() {
+  const blob = new Blob(
+    [JSON.stringify(read(K_CUSTOM, []), null, 2)],
+    { type: "application/json" }
+  );
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "tu-vung-cua-toi.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  showMessage("✅ Đã xuất file sao lưu!", "#16a36a");
+}
+
+async function importCustom(file) {
+  try {
+    const data = JSON.parse(await file.text());
+    if (!Array.isArray(data)) throw new Error("bad");
+    const cur = read(K_CUSTOM, []);
+
+    data.forEach(d => {
+      const valid = d && d.w && d.r && d.m && LEVELS.includes(d.level);
+      const dup = valid && cur.some(c =>
+        c.w.toLowerCase() === String(d.w).toLowerCase() && c.level === d.level
+      );
+      if (valid && !dup) {
+        cur.push({
+          id: Date.now() + Math.random().toString(36).slice(2, 6),
+          w: d.w, r: d.r, m: d.m,
+          jp: d.jp || "", vi: d.vi || "", level: d.level
+        });
+      }
+    });
+
+    if (!write(K_CUSTOM, cur)) return;
+    rebuild();
+    applyFilter();
+    renderWord();
+    renderCustomWords();
+    renderList();
+    showMessage("✅ Đã nhập sao lưu!", "#16a36a");
+  } catch {
+    showMessage("⚠️ File không hợp lệ!", "#e34d59");
+  }
+}
+
 /* ---------- Sự kiện ---------- */
 function bindEvents() {
   document.querySelectorAll(".level-btn").forEach(btn =>
@@ -489,43 +543,17 @@ function bindEvents() {
 
   $("addCustomWord").addEventListener("click", addCustom);
 
+  $("exportBtn").addEventListener("click", exportCustom);
+  $("importBtn").addEventListener("click", () => $("importFile").click());
+  $("importFile").addEventListener("change", e => {
+    if (e.target.files[0]) importCustom(e.target.files[0]);
+    e.target.value = "";
+  });
+
   document.addEventListener("keydown", e => {
     if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
     if (e.key === "ArrowRight") move(1);
     else if (e.key === "ArrowLeft") move(-1);
     else if (e.key === " ") { e.preventDefault(); setAnswer(!answerShown); }
   });
-}
-
-/* ---------- Khởi động ---------- */
-async function loadVocabulary() {
-  try {
-    const res = await fetch("./vocabulary.json");
-    if (!res.ok) throw new Error("Không tìm thấy vocabulary.json");
-    const data = await res.json();
-
-    LEVELS.forEach(lv => {
-      if (!Array.isArray(data[lv])) throw new Error("Dữ liệu " + lv + " không hợp lệ");
-    });
-
-    base = data;
-    rebuild();
-    applyFilter();
-    renderWord();
-    renderList();
-  } catch (err) {
-    console.error(err);
-    $("wordCard").classList.add("hidden");
-    $("counter").textContent =
-      "Lỗi tải từ vựng. Hãy kiểm tra vocabulary.json và chạy qua server (không mở file:// trực tiếp).";
-    $("vocabularyList").textContent = "Không tải được danh sách.";
-    updateStats();
-  }
-}
-
-bindEvents();
-renderCustomWords();
-loadVocabulary();
-</script>
-</body>
-  </html>
+  
