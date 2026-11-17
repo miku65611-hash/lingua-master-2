@@ -701,6 +701,43 @@ document.getElementById("addCustomWord").addEventListener("click", () => {
 
   saveCustomWords(words);
 
+  // Đồng bộ từ mới vào kho học tập chính
+  const newWord = { w, r, m, jp, vi };
+
+  if (!Array.isArray(vocabulary[level])) {
+    vocabulary[level] = [];
+  }
+
+  const alreadyExists = vocabulary[level].some(
+    item => item.w.toLowerCase() === w.toLowerCase()
+  );
+
+  if (!alreadyExists) {
+    vocabulary[level].push(newWord);
+  }
+
+  // Nếu đang học đúng cấp độ vừa thêm
+  if (currentLevel === level) {
+    const keyword = document
+      .getElementById("search")
+      .value.trim().toLowerCase();
+
+    filteredWords = vocabulary[currentLevel].filter(item =>
+      item.w.toLowerCase().includes(keyword) ||
+      item.r.toLowerCase().includes(keyword) ||
+      item.m.toLowerCase().includes(keyword) ||
+      item.jp.toLowerCase().includes(keyword) ||
+      item.vi.toLowerCase().includes(keyword)
+    );
+
+    currentIndex = Math.max(
+      0,
+      filteredWords.findIndex(item => item.w === w)
+    );
+
+    renderWord();
+  }
+  
   ["customWord", "customReading", "customMeaning",
    "customExampleJP", "customExampleVI"].forEach(id => {
     document.getElementById(id).value = "";
@@ -736,9 +773,33 @@ async function loadVocabulary() {
       }
     }
 
-    vocabulary = data;
-    filteredWords = vocabulary[currentLevel];
+    
+  vocabulary = data;
 
+  // Nạp lại từ vựng cá nhân đã lưu
+  const customWords = getCustomWords();
+
+  customWords.forEach(item => {
+    if (!Array.isArray(vocabulary[item.level])) {
+      vocabulary[item.level] = [];
+    }
+
+    const exists = vocabulary[item.level].some(
+      word => word.w.toLowerCase() === item.w.toLowerCase()
+    );
+
+    if (!exists) {
+      vocabulary[item.level].push({
+        w: item.w,
+        r: item.r,
+        m: item.m,
+        jp: item.jp,
+        vi: item.vi
+      });
+    }
+  });
+
+  filteredWords = vocabulary[currentLevel];
     renderWord();
 
     console.log("Lingua Master: Đã tải từ vựng thành công!");
