@@ -302,6 +302,61 @@ footer {
     placeholder="Tìm từ tiếng Nhật hoặc nghĩa tiếng Việt..."
   >
 
+  <!-- MY VOCABULARY -->
+  <div class="section-title">⭐ My Vocabulary</div>
+
+  <div class="stat-card" id="myVocabularySection">
+
+    <h3>➕ Thêm từ vựng mới</h3>
+
+    <label for="customWord">Từ tiếng Nhật</label>
+    <input class="search" id="customWord"
+      placeholder="Ví dụ: 勉強">
+
+    <label for="customReading">Cách đọc</label>
+    <input class="search" id="customReading"
+      placeholder="Ví dụ: べんきょう">
+
+    <label for="customMeaning">Nghĩa tiếng Việt</label>
+    <input class="search" id="customMeaning"
+      placeholder="Ví dụ: Học tập">
+
+    <label for="customExampleJP">Câu ví dụ tiếng Nhật</label>
+    <input class="search" id="customExampleJP"
+      placeholder="毎日、日本語を勉強します。">
+
+    <label for="customExampleVI">Dịch nghĩa câu ví dụ</label>
+    <input class="search" id="customExampleVI"
+      placeholder="Mỗi ngày tôi học tiếng Nhật.">
+
+    <label for="customLevel">Cấp độ JLPT</label>
+    <select class="search" id="customLevel">
+      <option value="N5">N5</option>
+      <option value="N4">N4</option>
+      <option value="N3" selected>N3</option>
+      <option value="N2">N2</option>
+      <option value="N1">N1</option>
+    </select>
+
+    <button class="action-btn known"
+      id="addCustomWord"
+      style="width:100%;margin-top:15px">
+      + Lưu từ vựng
+    </button>
+
+    <p id="customMessage"></p>
+
+    <hr>
+
+    <h3>📚 Từ vựng của tôi</h3>
+
+    <div id="customWordList">
+      Chưa có từ vựng cá nhân.
+    </div>
+
+  </div>
+  <!-- END MY VOCABULARY -->
+  
   <div class="card" id="wordCard">
     <div class="card-label" id="levelLabel">JLPT N5</div>
     <div class="word" id="word">水</div>
@@ -557,7 +612,112 @@ document.getElementById("search").addEventListener("input", event => {
   renderWord();
 });
 
-// Tải dữ liệu từ vocabulary.json
+// ===== MY VOCABULARY SYSTEM =====
+
+function getCustomWords() {
+  try {
+    return JSON.parse(
+      localStorage.getItem("linguaCustomWords") || "[]"
+    );
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveCustomWords(words) {
+  localStorage.setItem(
+    "linguaCustomWords",
+    JSON.stringify(words)
+  );
+}
+
+function renderCustomWords() {
+  const words = getCustomWords();
+  const list = document.getElementById("customWordList");
+
+  if (!list) return;
+
+  if (words.length === 0) {
+    list.textContent = "Chưa có từ vựng cá nhân.";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  words.forEach((item, index) => {
+    const card = document.createElement("div");
+
+    card.style.cssText =
+      "background:#eef5ff;padding:14px;margin-top:10px;border-radius:12px";
+
+    const title = document.createElement("strong");
+    title.textContent = item.w + " (" + item.r + ")";
+
+    const meaning = document.createElement("p");
+    meaning.textContent = item.m;
+
+    const level = document.createElement("small");
+    level.textContent = "JLPT " + item.level;
+
+    card.append(title, meaning, level);
+    list.appendChild(card);
+  });
+}
+
+// Thêm từ mới
+document.getElementById("addCustomWord").addEventListener("click", () => {
+  const w = document.getElementById("customWord").value.trim();
+  const r = document.getElementById("customReading").value.trim();
+  const m = document.getElementById("customMeaning").value.trim();
+  const jp = document.getElementById("customExampleJP").value.trim();
+  const vi = document.getElementById("customExampleVI").value.trim();
+  const level = document.getElementById("customLevel").value;
+
+  const message = document.getElementById("customMessage");
+
+  if (!w || !r || !m) {
+    message.textContent = "⚠️ Hãy nhập từ, cách đọc và nghĩa!";
+    message.style.color = "#e34d59";
+    return;
+  }
+
+  const words = getCustomWords();
+
+  const duplicate = words.some(item =>
+    item.w.toLowerCase() === w.toLowerCase() &&
+    item.level === level
+  );
+
+  if (duplicate) {
+    message.textContent = "⚠️ Từ này đã tồn tại!";
+    message.style.color = "#e34d59";
+    return;
+  }
+
+  words.push({
+    id: Date.now().toString(),
+    w, r, m, jp, vi, level
+  });
+
+  saveCustomWords(words);
+
+  ["customWord", "customReading", "customMeaning",
+   "customExampleJP", "customExampleVI"].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+
+  message.textContent = "✅ Đã lưu từ vựng thành công!";
+  message.style.color = "#16a36a";
+
+  renderCustomWords();
+  updateStats();
+});
+
+// Hiển thị từ đã lưu khi mở ứng dụng
+renderCustomWords();
+
+// ===== END MY VOCABULARY SYSTEM =====
+  // Tải dữ liệu từ vocabulary.json
 async function loadVocabulary() {
   try {
     const response = await fetch("./vocabulary.json");
